@@ -1,0 +1,408 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans TC', Arial, sans-serif;
+}
+
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.card--custom {
+    left: 0;
+    right: 0;
+    position: fixed;
+    background-color: #f6f6f6;
+    z-index: 1000;
+    visibility: visible;
+    opacity: 0.96;
+    transition: opacity 0.33s linear, height 0.3s ease;
+    border-radius: 8px;
+    border: none;
+    line-height: 0rem;
+    margin-top: 2rem;
+}
+
+.card-header {
+    background-color: #f6f6f6;
+    padding: 1rem 2rem 0rem !important;
+    border: none;
+    border-radius: 8px;
+    position: relative;
+}
+
+.card-body {
+    overflow-y: auto;
+    max-height: calc(100vh - 220px);
+    padding: 0 1.25rem 1rem !important;
+}
+
+.card-footer {
+    border: none !important;
+    padding: 0.75rem 1.25rem !important;
+}
+
+.toggle-icon {
+    position: absolute;
+    top: 10px;
+    right: 40px;
+    font-size: 1.2rem;
+    line-height: 1;
+    padding: 10px;
+    cursor: pointer;
+    color: #00000075;
+    z-index: 10;
+    transition: color 0.2s;
+}
+
+.toggle-icon:hover {
+    color: #2980b9;
+}
+
+.layer-control {
+    transition: height 0.3s ease;
+}
+
+.layer-control .toggle-layer-icon {
+    display: block;
+    font-size: 1.2rem;
+    line-height: 1;
+    padding: 8px;
+    cursor: pointer;
+    color: #000000;
+    text-align: center;
+    transition: color 0.2s;
+}
+
+.layer-control .toggle-layer-icon:hover {
+    color: #2980b9;
+}
+
+.layer-control.collapsed {
+    height: 20px;
+    overflow: hidden;
+}
+
+.layer-control.collapsed .layer-content {
+    display: none;
+}
+
+.clear-button {
+    display: block;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    height: 32px;
+    padding: 0 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+.clear-button:hover {
+    background: #c0392b;
+}
+
+@media only screen and (max-width: 835px) {
+    .card--custom {
+        width: 100%;
+        bottom: 0;
+        max-height: 30%;
+        height: 30%;
+        overflow-y: auto;
+        font-size: 0.85rem;
+        line-height: 1.3;
+    }
+    .card--custom.expanded {
+        max-height: 60%;
+        height: 60%;
+    }
+    .card-body {
+        max-height: calc(60% - 80px);
+    }
+    .search-filter {
+        position: absolute;
+        font-size: 12px;
+        top: 5px;
+        left: 45px;
+        flex-direction: column;
+        gap: 8px;
+        background: white;
+        padding: 10px;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        z-index: 1002;
+        overflow: visible;
+    }
+    #searchInput, #districtFilter, #clearFilter {
+        display: block;
+        width: 40vw;
+        height: 32px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    #suggestions {
+        width: 40vw;
+        max-height: 200px;
+        overflow-y: auto;
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        z-index: 1003;
+    }
+    .layer-control {
+        width: 160px;
+        font-size: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 0px;
+        margin-top: 6px;
+        background: white;
+        padding: 0px;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        z-index: 1001;
+        width: 40vw;
+    }
+    .layer-control.collapsed {
+        height: 35px; 
+        width: 35px; 
+        overflow: hidden;
+    }
+    .layer-control .toggle-layer-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media only screen and (min-width: 836px) {
+    .card--custom {
+        max-width: 350px;
+        max-height: 80%;
+        top: 130px;
+        left: 10px;
+        border-radius: 8px !important;
+        font-size: 1rem;
+        line-height: 1.5;
+        overflow-y: auto;
+    }
+    .card-body {
+        max-height: calc(80% - 80px);
+    }
+    .toggle-icon {
+        display: none;
+    }
+    .search-filter {
+        position: absolute;
+        top: 10px;
+        left: 50px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        background: white;
+        padding: 10px;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        z-index: 1002;
+    }
+    #searchInput, #districtFilter, #clearFilter {
+        display: block;
+        width: 270px;
+        height: 32px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    #suggestions {
+        width: 270px;
+        max-height: 200px;
+        overflow-y: auto;
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        z-index: 1003;
+    }
+    .layer-control {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: white;
+        padding: 5px;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        z-index: 1002;
+    }
+    .layer-control.collapsed {
+        height: 40px;
+    }
+    .layer-control .toggle-layer-icon {
+        display: none;
+    }
+    #searchFilter .layer-control {
+        display: none !important;
+    }
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.2rem;
+    line-height: 1;
+    padding: 8px;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: 0.5;
+    cursor: pointer;
+    z-index: 10;
+    transition: color 0.2s;
+}
+
+.close:hover {
+    color: #c0392b;
+}
+
+.card-hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: visibility 0s 0.33s, opacity 0.33s linear;
+}
+
+.card--custom #branchStatus {
+    margin-left: 1rem;
+    font-size: 1.26rem;
+    padding: 1px 10px;
+    margin-bottom: 0.5rem;
+    border-radius: 0.8rem;
+    font-weight: 350;
+    display: inline-block;
+    color: black;
+}
+
+.card--custom .blue {
+    background: rgb(169, 210, 255);
+}
+
+.card--custom .green {
+    background: rgb(77, 238, 77);
+}
+
+.card--custom #branchName {
+    margin-left: 1rem;
+    font-size: 1.73rem;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.card--custom #branchdistrict {
+    margin-left: 2rem;
+    margin-bottom: 0;
+    font-size: 1.2rem;
+}
+
+.card--custom #branchDetail {
+    margin-left: 2rem;
+    margin-bottom: 0;
+    font-size: 1.2rem;
+}
+
+.maplibregl-ctrl-group {
+    background: white;
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+}
+
+.maplibregl-ctrl-group button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.geolocation-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+}
+
+.geolocation-button i {
+    margin: 0;
+}
+
+.error {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 0, 0, 0.8);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1004;
+}
+
+.zoom-alert {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1004;
+}
+
+#issueReport {
+    margin-left: 2rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.search-container {
+    position: relative;
+}
+
+.suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+
+.suggestion-item {
+    padding: 5px 10px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.suggestion-item:hover {
+    background: #f0f0f0;
+}
+
+.maplibregl-popup-content {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 0.9rem;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
