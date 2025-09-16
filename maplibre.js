@@ -392,7 +392,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js').then(() => {
+            navigator.serviceWorker.register('/HK_basketball_field_map/sw.js').then(() => {
                 console.log('Service Worker 註冊成功');
             }).catch(err => {
                 console.error('Service Worker 註冊失敗:', err);
@@ -402,4 +402,5 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (e) {
         console.error('初始化錯誤:', e);
     }
+
 });
