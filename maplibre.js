@@ -28,6 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
             maxBounds: [[113.75, 22.15], [114.481, 22.571]]
         });
 
+        // Initialize map with compact attribution control
+        map.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-right');
+
         // disable map rotation using right click + drag
         map.dragRotate.disable();
 
@@ -89,14 +92,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 closeButton.onclick = () => {
                     info.classList.add('card-hidden');
                     history.pushState({}, '', window.location.pathname);
+                    document.title = '香港籃球場地圖'; // Reset title when closing info card
                 };
                 toggleIcon.onclick = () => {
                     const isExpanded = info.classList.toggle('expanded');
                     toggleIcon.innerHTML = isExpanded ? '<i class="fas fa-chevron-down"></i>' : '<i class="fas fa-chevron-up"></i>';
                     toggleIcon.setAttribute('aria-label', isExpanded ? '收起資訊卡' : '展開資訊卡');
                 };
+                // Update document title with venue name
+                document.title = `${properties.NAME_TC}籃球場 | 香港籃球場地圖`;
             } else {
                 info.classList.add('card-hidden');
+                document.title = '香港籃球場地圖'; // Reset title when no properties
             }
         }
 
@@ -155,6 +162,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         map.on('load', () => {
+            // Set default document title on load
+            document.title = '香港籃球場地圖';
             map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-left');
 
             class GeolocationControl {
@@ -370,6 +379,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 history.pushState({}, '', window.location.pathname);
                 map.getSource('basketball-courts').setData(filterData('', ''));
                 map.flyTo({ center: [114.17475, 22.337533], zoom: 11, essential: true });
+                document.title = '香港籃球場地圖'; // Reset title on clear
             });
 
             map.on('zoomend', () => {
@@ -392,7 +402,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/HK_basketball_field_map/sw.js').then(() => {
+            navigator.serviceWorker.register('/sw.js').then(() => {
                 console.log('Service Worker 註冊成功');
             }).catch(err => {
                 console.error('Service Worker 註冊失敗:', err);
@@ -402,5 +412,4 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (e) {
         console.error('初始化錯誤:', e);
     }
-
 });
