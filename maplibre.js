@@ -27,10 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
             maxZoom: 19,
             maxBounds: [[113.75, 22.15], [114.481, 22.571]]
         });
-
-        // Initialize map with compact attribution control
-        map.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-right');
-
+        
         // disable map rotation using right click + drag
         map.dragRotate.disable();
 
@@ -412,4 +409,5 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (e) {
         console.error('初始化錯誤:', e);
     }
+
 });
