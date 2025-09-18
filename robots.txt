@@ -1,7 +1,8 @@
 User-agent: * 
 Allow: / 
-Sitemap: https://alexyip712.github.io/HK_basketball_field_map/sitemap.xml
+Sitemap: https://alexyip712.github.io/HK_basketball_court_map/sitemap.xml
 
 Disallow: /sw.js 
 Disallow: /.js$ 
+
 Disallow: /.css$
